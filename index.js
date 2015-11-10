@@ -38,6 +38,6 @@ app.on('ready', function() {
 		'node-integration': false
 	}
   });
-  mainWindow.openDevTools();
+	mainWindow.openDevTools({ showDevTools: true });
   mainWindow.loadUrl('http://www.deezer.com');
 });
