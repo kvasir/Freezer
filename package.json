@@ -1,0 +1,44 @@
+{
+  "name": "Freezer",
+  "productName": "Freezer",
+  "version": "0.0.0",
+  "description": "Unofficial Deezer desktop client.",
+  "license": "MIT",
+  "repository": "kvasir/Freezer",
+  "author": "Kvasir",
+  "contributors": [
+    "Martin Sandström <maartiin_91@hotmail.com> (http://martinsandstrom.github.io)",
+    "John-Philip Johansson <seriema@gmail.com> (http://johansson.jp/)",
+    "Esbjörn Ekberg <oakninja@gmail.com> (http://oak.ninja/)"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "electronVersion": "0.34.1",
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --prune --asar --all --version=$npm_package_electronVersion"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "electron-app"
+  ],
+  "dependencies": {
+    "electron-debug": "^0.3.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.0.0",
+    "electron-prebuilt": "^0.34.1",
+    "xo": "^0.10.0"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
