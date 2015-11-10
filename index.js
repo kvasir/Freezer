@@ -10,24 +10,25 @@ app.on('window-all-closed', function() {
     app.quit();
 });
 
-var ppapi_flash_path = null;
+let ppapiFlashPath = null;
+let ppapiFlashVersion = null;
 
 // Specify flash path.
 // On Windows, it might be /path/to/pepflashplayer.dll
 // On OS X, /path/to/PepperFlashPlayer.plugin
 // On Linux, /path/to/libpepflashplayer.so
-if(process.platform  == 'win32'){
-  ppapi_flash_path = path.join(__dirname, 'pepflashplayer.dll');
+if(process.platform	== 'win32'){
+	ppapiFlashPath = path.join(__dirname, 'pepper/win32/pepflashplayer.dll');
+	ppapiFlashVersion = '19.0.0.226';
 } else if (process.platform == 'linux') {
-  ppapi_flash_path = path.join(__dirname, 'libpepflashplayer.so');
+	ppapiFlashPath = path.join(__dirname, 'pepper/linux/libpepflashplayer.so');
 } else if (process.platform == 'darwin') {
-  ppapi_flash_path = path.join(__dirname, 'PepperFlashPlayer.plugin');
+	ppapiFlashPath = path.join(__dirname, 'pepper/darwin/PepperFlashPlayer.plugin');
+	ppapiFlashVersion = '19.0.0.226';
 }
 
-app.commandLine.appendSwitch('ppapi-flash-path', ppapi_flash_path);
-
-// Specify flash version, for example, v18.0.0.203
-app.commandLine.appendSwitch('ppapi-flash-version', '19.0.0.226');
+app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
+app.commandLine.appendSwitch('ppapi-flash-version', ppapiFlashVersion);
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({
