@@ -6,8 +6,8 @@ var BrowserWindow = require('browser-window');
 var mainWindow = null;
 
 app.on('window-all-closed', function() {
-  if (process.platform != 'darwin')
-    app.quit();
+	if (process.platform != 'darwin')
+		app.quit();
 });
 
 let ppapiFlashPath = null;
@@ -31,14 +31,15 @@ app.commandLine.appendSwitch('ppapi-flash-path', ppapiFlashPath);
 app.commandLine.appendSwitch('ppapi-flash-version', ppapiFlashVersion);
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({
-    'width': 800,
-    'height': 600,
-    'web-preferences': {
-		'plugins': true,
-		'node-integration': false
-	}
-  });
+	mainWindow = new BrowserWindow({
+		'width': 800,
+		'height': 600,
+		'web-preferences': {
+			'plugins': true,
+			'node-integration': false
+		}
+	});
+
 	mainWindow.openDevTools({ showDevTools: true });
-  mainWindow.loadUrl('http://www.deezer.com');
+	mainWindow.loadUrl('http://www.deezer.com');
 });
