@@ -2,13 +2,17 @@
 var app = require('app');
 var path = require('path');
 var BrowserWindow = require('browser-window');
+var ipc = require('ipc');
 
-var mainWindow = null;
+let mainWindow = null;
+let noConnectionWindow = null;
+
 
 app.on('window-all-closed', function() {
 	if (process.platform != 'darwin')
 		app.quit();
 });
+
 
 let ppapiFlashPath = null;
 let ppapiFlashVersion = null;
@@ -36,10 +40,16 @@ app.on('ready', function() {
 		'height': 600,
 		'web-preferences': {
 			'plugins': true,
-			'node-integration': false
+			'node-integration': false,
+			'preload': path.join(__dirname, 'browser.js'),
 		}
 	});
 
-	mainWindow.openDevTools({ showDevTools: true });
+	mainWindow.openDevTools({ showDevTools: false });
 	mainWindow.loadUrl('http://www.deezer.com');
+});
+
+ipc.on('online-status-changed', function(event, status) {
+	//What do we want to do when the user is offline?
+  console.log(status);
 });
