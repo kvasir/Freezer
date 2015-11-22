@@ -1,28 +1,17 @@
-<<<<<<< HEAD
-'use strict'
-var app = require('app');
-var path = require('path');
-var BrowserWindow = require('browser-window');
-var ipc = require('ipc');
 
-let mainWindow = null;
-let noConnectionWindow = null;
-
-=======
 'use strict';
 const app = require('app');
 const path = require('path');
 const BrowserWindow = require('browser-window');
+const ipc = require('ipc');
 
 let mainWindow = null;
->>>>>>> master
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit();
 	}
 });
-
 
 let ppapiFlashPath = null;
 let ppapiFlashVersion = null;
@@ -51,19 +40,14 @@ app.on('ready', () => {
 		'web-preferences': {
 			'plugins': true,
 			'node-integration': false,
-			'preload': path.join(__dirname, 'browser.js'),
+			'preload': `${__dirname}/browser.js')`
 		}
 	});
-
-<<<<<<< HEAD
-	mainWindow.openDevTools({ showDevTools: false });
-=======
-	mainWindow.openDevTools({showDevTools: true});
->>>>>>> master
+	mainWindow.openDevTools({showDevTools: false});
 	mainWindow.loadUrl('http://www.deezer.com');
 });
 
-ipc.on('online-status-changed', function(event, status) {
-	//What do we want to do when the user is offline?
-  console.log(status);
+ipc.on('online-status-changed', (event, status) => {
+	// What do we want to do when the user is offline?
+	console.log(status);
 });
