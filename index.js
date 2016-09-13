@@ -41,6 +41,9 @@ app.on('ready', () => {
     }
   });
 
-  mainWindow.openDevTools({showDevTools: true});
-  mainWindow.loadUrl('http://www.deezer.com');
+  mainWindow = new BrowserWindow({width: 1024, height: 768 });
+
+  // mainWindow.openDevTools({showDevTools: true});
+  // mainWindow.loadUrl('http://www.deezer.com');
+  mainWindow.loadUrl('file://' + __dirname + '/browser/browser.html');
 });
