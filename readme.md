@@ -27,3 +27,5 @@ Builds the app for OS X, Linux, and Windows, using [electron-packager](https://g
 ## License
 
 MIT © [<%= name %>](<%= website %>)
+
+http://character-code.com/special-character-html-codes.php - ICONS

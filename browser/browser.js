@@ -14,7 +14,7 @@ onload = function() {
   };
 
   document.querySelector('#home').onclick = function() {
-    navigateTo('http://www.github.com/');
+    navigateTo('http://www.deezer.com/');
   };
 
   document.querySelector('#reload').onclick = function() {
@@ -38,11 +38,11 @@ onload = function() {
   };
 
   webview.addEventListener('close', handleExit);
-  webview.addEventListener('did-start-loading', handleLoadStart);
+  webview.addEventListener('did-start-loading', handleLoadStart.bind(webview));
   webview.addEventListener('did-stop-loading', handleLoadStop);
   webview.addEventListener('did-fail-load', handleLoadAbort);
-  webview.addEventListener('did-get-redirect-request', handleLoadRedirect);
-  webview.addEventListener('did-finish-load', handleLoadCommit);
+  webview.addEventListener('did-get-redirect-request', handleLoadRedirect.bind(webview));
+  webview.addEventListener('did-finish-load', handleLoadCommit.bind(webview));
 
   // Test for the presence of the experimental <webview> zoom and find APIs.
   if (typeof(webview.setZoom) == "function" &&
@@ -241,12 +241,19 @@ function handleKeyDown(event) {
   }
 }
 
+function setLocation(webview) {
+  document.querySelector('#location').value = webview.getUrl();
+  document.title = webview.getTitle();
+}
+
 function handleLoadCommit() {
   resetExitedState();
-  var webview = document.querySelector('webview');
-  document.querySelector('#location').value = webview.getURL();
-  document.querySelector('#back').disabled = !webview.canGoBack();
-  document.querySelector('#forward').disabled = !webview.canGoForward();
+
+  setLocation(this);
+  // document.querySelector('#location').value = this.getUrl();
+
+  // document.querySelector('#back').disabled = !this.canGoBack();
+  // document.querySelector('#forward').disabled = !this.canGoForward();
   closeBoxes();
 }
 
@@ -255,11 +262,11 @@ function handleLoadStart(event) {
   isLoading = true;
 
   resetExitedState();
-  if (!event.isTopLevel) {
-    return;
-  }
 
-  document.querySelector('#location').value = event.url;
+  // document.querySelector('#location').value = event.url;
+
+  setLocation(this);
+  // document.querySelector('#location').value = this.getUrl();
 }
 
 function handleLoadStop(event) {
@@ -277,7 +284,10 @@ function handleLoadAbort(event) {
 
 function handleLoadRedirect(event) {
   resetExitedState();
-  document.querySelector('#location').value = event.newUrl;
+  // document.querySelector('#location').value = event.newUrl;
+
+  setLocation(this);
+  // document.querySelector('#location').value = this.getUrl();
 }
 
 function getNextPresetZoom(zoomFactor) {
