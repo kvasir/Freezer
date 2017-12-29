@@ -1,29 +1,25 @@
+# Freezer [![CircleCI](https://circleci.com/gh/sfate/Freezer.svg?style=svg&circle-token=14bbcbdf2add0517cc5ee97ff6c07587650c25f4)](https://circleci.com/gh/sfate/Freezer)
 
-# Freezer
+Unofficial [Deezer](https://deezer.com) desktop client
 
-> Unofficial Deezer desktop client
-
-## Dev
-
-```
-$ npm install
-```
-
-### Run
+## Install
 
 ```
-$ npm start
+$ yarn install
 ```
 
-### Build
+## Run
 
 ```
-$ npm run build
+$ yarn start
 ```
 
-Builds the app for OS X, Linux, and Windows, using [electron-packager](https://github.com/maxogden/electron-packager).
+## Test
 
+```
+$ yarn test
+```
 
-## License
+## [MIT-license](/license.md)
 
-MIT © [<%= name %>](<%= website %>)
+## Version 0.0.1
